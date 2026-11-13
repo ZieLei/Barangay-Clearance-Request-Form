@@ -6,22 +6,23 @@
 :root {
   color-scheme: light;
 
+  --pixel-font: 'Digital Display', 'Silkscreen', monospace;
+
   --background: #fbf1c7;
   --surface: color-mix(in oklab, var(--background), white 35%);
+  --field: color-mix(in oklab, var(--background), white 65%);
+
   --text-primary: #3c3836;
+  --border: #d5c4a1;
+  --shadow: var(--text-primary);
 
   --accent-primary: #076678;
   --accent-secondary: #af3a03;
-
-  --border: #d5c4a1;
-  --shadow: var(--text-primary);
+  --toggle: #d79921;
 
   --success: #79740e;
   --warning: #b57614;
   --danger: #9d0006;
-
-  --toggle: #d79921;
-  --field: color-mix(in oklab, var(--background), white 65%);
 }
 
 .dark {
@@ -29,93 +30,86 @@
 
   --background: #1d2021;
   --surface: #282828;
+  --field: #1d2021;
+
   --text-primary: #ebdbb2;
+  --border: #504945;
+  --shadow: #0f1011;
 
   --accent-primary: #83a598;
   --accent-secondary: #fe8019;
-
-  --border: #504945;
-  --shadow: #0f1011;
+  --toggle: #d3869b;
 
   --success: #b8bb26;
   --warning: #fabd2f;
   --danger: #fb4934;
-
-  --toggle: #d3869b;
-
-  --field: #1d2021;
 }
 
 @font-face {
-  font-family: 'LINE Seed Sans';
-  src: url('./assets/fonts/line-seed/LINESeedSans_W_Th.woff2') format('woff2');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'LINE Seed Sans';
-  src: url('./assets/fonts/line-seed/LINESeedSans_W_Rg.woff2') format('woff2');
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/space-mono/SpaceMono-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'LINE Seed Sans';
-  src: url('./assets/fonts/line-seed/LINESeedSans_W_Bd.woff2') format('woff2');
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/space-mono/SpaceMono-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'LINE Seed Sans';
-  src: url('./assets/fonts/line-seed/LINESeedSans_W_XBd.woff2') format('woff2');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'LINE Seed Sans';
-  src: url('./assets/fonts/line-seed/LINESeedSans_W_He.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('./assets/fonts/instrument-serif/InstrumentSerif-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Serif';
-  src: url('./assets/fonts/instrument-serif/InstrumentSerif-Italic.ttf') format('truetype');
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/space-mono/SpaceMono-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/space-mono/SpaceMono-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('./assets/fonts/fraunces/Fraunces-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./assets/fonts/space-grotesk/SpaceGrotesk-Variable.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
-  --font-line-seed: 'LINE Seed Sans', sans-serif;
-  --font-instrument-serif: 'Instrument Serif', serif;
-  --font-pixel: 'Visitor', 'Silkscreen', monospace;
+  --font-space-mono: 'Space Mono', ui-monospace, monospace;
+  --font-fraunces: 'Fraunces', Georgia, serif;
+  --font-space-grotesk: 'Space Grotesk', system-ui, sans-serif;
+  --pixel-font: 'Digital Display', monospace;
 
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-field: var(--field);
+
   --color-text-primary: var(--text-primary);
+  --color-border: var(--border);
+  --color-shadow: var(--shadow);
 
   --color-accent-primary: var(--accent-primary);
   --color-accent-secondary: var(--accent-secondary);
-
-  --color-border: var(--border);
-  --color-surface: var(--surface);
-  --color-shadow: var(--shadow);
+  --color-toggle: var(--toggle);
 
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -138,9 +132,129 @@ body {
   border: 1px solid var(--panel-line);
   border-radius: 4px;
   box-shadow:
-    0 6px 0 -1px color-mix(in oklab, var(--background), black 05%),
+    0 6px 0 -1px color-mix(in oklab, var(--background), black 5%),
     0 6px 0 0 var(--panel-line),
     0 10px 0 0 rgb(0 0 0 / 0.06);
+}
+
+@utility retro-input {
+  --input-line: color-mix(in oklab, var(--border) 65%, var(--text-primary));
+  --input-band: var(--border);
+
+  height: 2.5rem;
+  padding: 8px 0.75rem 0;
+
+  font-family: var(--font-space-grotesk);
+  font-size: 1rem;
+  color: var(--text-primary);
+
+  background-color: var(--field);
+  border: 1px solid var(--input-line);
+  border-radius: 0;
+  box-shadow:
+    inset 0 7px 0 0 var(--input-band),
+    inset 0 8px 0 0 color-mix(in oklab, var(--input-band) 70%, var(--text-primary));
+  outline: none;
+  transition: border-color 150ms;
+
+  &::placeholder {
+    color: color-mix(in oklab, var(--text-primary) 45%, transparent);
+    text-transform: uppercase;
+  }
+
+  &:focus,
+  &:focus-within {
+    border-color: var(--accent-primary);
+  }
+
+  &.ng-touched.ng-invalid {
+    border-color: var(--danger);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:is(textarea) {
+    height: auto;
+    min-height: 8rem;
+    padding-top: 14px;
+    resize: vertical;
+  }
+}
+
+@utility retro-button {
+  --btn: var(--accent-primary);
+  --btn-fill: var(--btn);
+  --btn-ink: var(--background);
+  --btn-lip: color-mix(in oklab, var(--btn) 60%, black);
+  --btn-press: 4px;
+  --btn-highlight: inset 0 1px 0 color-mix(in oklab, var(--btn-fill), white 30%);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  height: 2.5rem;
+  padding: 0 1.75rem 0 1.25rem;
+
+  font-family: var(--pixel-font);
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--btn-ink);
+
+  background-color: var(--btn-fill);
+  border: 1px solid var(--btn-lip);
+  border-radius: 9999px 4px 4px 9999px;
+  box-shadow:
+    var(--btn-highlight),
+    0 var(--btn-press) 0 0 var(--btn-lip),
+    0 calc(var(--btn-press) + 2px) 8px rgb(0 0 0 / 0.15);
+
+  cursor: pointer;
+  transition:
+    translate 70ms ease-out,
+    box-shadow 70ms ease-out,
+    filter 150ms;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+
+  /* Press: slide down by the full lip height so the button sinks into its shadow. */
+  &:active:not(:disabled) {
+    translate: 0 var(--btn-press);
+    filter: brightness(0.95);
+    box-shadow:
+      inset 0 2px 0 rgb(0 0 0 / 0.18),
+      0 0 0 0 var(--btn-lip),
+      0 0 0 rgb(0 0 0 / 0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--btn-lip);
+    outline-offset: 4px;
+  }
+}
+
+/* Mirrors the button: rounded end on the right, icon placed after the label. */
+@utility retro-button-flip {
+  padding: 0 1.25rem 0 1.75rem;
+  border-radius: 4px 9999px 9999px 4px;
+}
+
+@utility retro-button-success {
+  --btn: var(--success);
+}
+
+@utility retro-button-danger {
+  --btn: var(--danger);
 }
 
 @utility retro-toggle {
@@ -162,7 +276,7 @@ body {
     position: absolute;
     left: 0.25rem;
     right: 0.25rem;
-    top: 0.375rem;
+    top: 0.5rem;
     height: 0.75rem;
     border-radius: 9999px;
     background-color: var(--toggle-color);
@@ -182,7 +296,7 @@ body {
 @utility retro-toggle-thumb {
   position: absolute;
   z-index: 1;
-  top: -2px;
+  top: 0;
   left: 0;
   width: 1.5rem;
   height: 1.5rem;
@@ -204,117 +318,6 @@ body {
     box-shadow 200ms;
 }
 
-@utility retro-button {
-  --btn: var(--accent-primary);
-  --btn-fill: color-mix(in oklab, var(--btn) 40%, var(--surface));
-  --btn-ink: color-mix(in oklab, var(--btn) 85%, var(--text-primary));
-  --btn-lip: color-mix(in oklab, var(--btn) 70%, black);
-
-  display: inline-flex;
-  align-items: center;
-  gap: 1.25rem;
-  height: 2.5rem;
-  padding: 0 1.75rem 0 1.25rem;
-
-  font-family: 'Visitor', 'Silkscreen', monospace;
-  font-size: 1.25rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--btn-ink);
-
-  background-color: var(--btn-fill);
-  border: 1px solid var(--btn-lip);
-  border-radius: 9999px 4px 4px 9999px;
-  box-shadow:
-    inset 0 1px 0 color-mix(in oklab, var(--btn-fill), white 35%),
-    0 4px 0 0 var(--btn-lip),
-    0 6px 8px rgb(0 0 0 / 0.15);
-
-  cursor: pointer;
-  transition:
-    translate 80ms,
-    box-shadow 80ms,
-    filter 150ms;
-
-  &:hover:not(:disabled) {
-    filter: brightness(1.05);
-  }
-
-  &:active:not(:disabled) {
-    translate: 0 3px;
-    box-shadow:
-      inset 0 1px 0 color-mix(in oklab, var(--btn-fill), white 35%),
-      0 1px 0 0 var(--btn-lip),
-      0 2px 3px rgb(0 0 0 / 0.15);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  &:focus-visible {
-    outline: 2px dashed var(--btn-lip);
-    outline-offset: 4px;
-  }
-}
-
-@utility retro-button-success {
-  --btn: var(--success);
-}
-
-@utility retro-button-danger {
-  --btn: var(--danger);
-}
-@utility retro-input {
-  --input-line: color-mix(in oklab, var(--border) 65%, var(--text-primary));
-  --input-band: var(--border);
-
-  height: 2.5rem;
-  padding: 8px 0.75rem 0;
-
-  font-family: 'Visitor', 'Silkscreen', monospace;
-  font-size: 1.25rem;
-  color: var(--text-primary);
-
-  background-color: var(--field);
-  border: 1px solid var(--input-line);
-  border-radius: 0;
-  box-shadow:
-    /* the thick band along the top */
-    inset 0 7px 0 0 var(--input-band),
-    /* darker line under the band */ inset 0 8px 0 0
-      color-mix(in oklab, var(--input-band) 70%, var(--text-primary));
-  outline: none;
-  transition: border-color 150ms;
-
-  &::placeholder {
-    color: color-mix(in oklab, var(--text-primary) 45%, transparent);
-    text-transform: uppercase;
-  }
-
-  &:focus,
-  &:focus-within {
-    border-color: var(--accent-primary);
-  }
-
-  /* Angular adds these classes automatically */
-  &.ng-touched.ng-invalid {
-    border-color: var(--danger);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  &:is(textarea) {
-    height: auto;
-    min-height: 8rem;
-    padding-top: 14px;
-    resize: vertical;
-  }
-}
 @utility retro-item {
   border-radius: 2px;
   cursor: pointer;
@@ -333,4 +336,10 @@ body {
     color: var(--surface);
     box-shadow: 0 2px 0 0 color-mix(in oklab, var(--accent-primary) 70%, black);
   }
+}
+
+/* Placeholders use Space Grotesk to set them apart from typed text. */
+::placeholder {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.875rem;
 }

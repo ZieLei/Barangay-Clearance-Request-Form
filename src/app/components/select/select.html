@@ -1,4 +1,4 @@
-<div class="relative inline-block font-line-seed">
+<div class="relative inline-block font-space-mono">
   <!-- Trigger -->
   <button
     type="button"
@@ -10,7 +10,8 @@
     (click)="toggle()"
     (keydown)="onKeydown($event)"
   >
-    <span class="truncate" [class.opacity-45]="!value" [class.uppercase]="!value">
+    <span class="truncate" [class.opacity-45]="!value" [class.uppercase]="!value"
+      [class.font-space-grotesk]="!value" [class.text-sm]="!value">
       {{ value ?? placeholder() }}
     </span>
     <i
