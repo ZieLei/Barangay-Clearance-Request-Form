@@ -15,7 +15,19 @@ import { phMobileValidator } from './validators/ph-mobile.validator';
 })
 export class App {
   protected readonly title = signal('barangay-clearance');
-  isDark = false;
+  private _isDark = false;
+
+  get isDark(): boolean {
+    return this._isDark;
+  }
+
+  set isDark(value: boolean) {
+    this._isDark = value;
+    document.documentElement.classList.toggle('dark', value);
+    try {
+      localStorage.setItem('theme', value ? 'dark' : 'light');
+    } catch {}
+  }
 
   readonly purposes = [
     'Employment',
@@ -71,6 +83,8 @@ export class App {
   });
 
   constructor() {
+    this.isDark = this.initialTheme();
+
     const other = this.form.controls.otherPurpose;
 
     this.form.controls.purpose.valueChanges
@@ -86,6 +100,14 @@ export class App {
         }
         other.updateValueAndValidity();
       });
+  }
+
+  private initialTheme(): boolean {
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved === 'dark';
+    } catch {}
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
   /** True when a control was touched and has the given error. */
