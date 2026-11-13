@@ -1,7 +1,7 @@
 <div class="relative inline-block font-line-seed">
   <!-- Input field -->
   <div
-    class="flex flex-row items-center border-2 bg-border/50 font-line-seed border-text-primary w-70 h-9 px-1 shadow-[inset_0px_6px_0px_0px_var(--text-primary)]"
+    class="flex flex-row items-center border-2 bg-border/50 font-line-seed border-text-primary w-70 h-9 px-1 shadow-[inset_0px_6px_0px_0px_var(--shadow)]"
     [class.opacity-50]="disabled">
     <input type="text" class="flex-1 min-w-0 h-full bg-transparent py-2 px-1 focus:outline-none"
       placeholder="YYYY-MM-DD" [value]="inputText" [disabled]="disabled" [attr.aria-invalid]="inputInvalid"
@@ -22,7 +22,7 @@
   <!-- Calendar popup -->
   @if (isOpen) {
   <div
-    class="absolute left-0 top-full mt-1 z-50 bg-background border-2 border-text-primary w-70 py-2 px-2 font-line-seed shadow-[inset_0px_6px_0px_0px_var(--text-primary)]">
+    class="absolute left-0 top-full mt-1 z-50 bg-background border-2 border-text-primary w-70 py-2 px-2 font-line-seed shadow-[inset_0px_6px_0px_0px_var(--shadow)]">
 
     <!-- Calendar header -->
     <div class="flex flex-row justify-between items-center">

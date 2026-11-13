@@ -6,33 +6,39 @@
 :root {
   color-scheme: light;
 
+  /* Gruvbox (light) */
   --background: #fbf1c7;
-  --text-primary: #654735;
+  --surface: color-mix(in oklab, var(--background), white 35%);
+  --text-primary: #3c3836;
 
-  --accent-primary: #45707a;
-  --accent-secondary: #c35e0a;
+  --accent-primary: #076678;
+  --accent-secondary: #af3a03;
 
-  --border: #e5d5ad;
+  --border: #d5c4a1;
+  --shadow: var(--text-primary);
 
-  --success: #6c782e;
-  --warning: #b47109;
-  --danger: #c14a4a;
+  --success: #79740e;
+  --warning: #b57614;
+  --danger: #9d0006;
 }
 
 .dark {
   color-scheme: dark;
 
-  --background: #282828;
-  --text-primary: #d4be98;
+  /* Gruvbox (dark, hard contrast) */
+  --background: #1d2021;
+  --surface: #282828;
+  --text-primary: #ebdbb2;
 
-  --accent-primary: #7daea3;
-  --accent-secondary: #e78a4e;
+  --accent-primary: #83a598;
+  --accent-secondary: #fe8019;
 
-  --border: #45403d;
+  --border: #504945;
+  --shadow: #0f1011;
 
-  --success: #a9b665;
-  --warning: #d8a657;
-  --danger: #ea6962;
+  --success: #b8bb26;
+  --warning: #fabd2f;
+  --danger: #fb4934;
 }
 
 @font-face {
@@ -102,6 +108,8 @@
   --color-accent-secondary: var(--accent-secondary);
 
   --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-shadow: var(--shadow);
 
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -115,4 +123,23 @@ body {
 
   min-height: 100vh;
   transition: background-color 200ms ease, color 200ms ease;
+}
+
+@utility retro-toggle {
+  --toggle-track: var(--background);
+  --toggle-thumb: var(--text-primary);
+  --toggle-shadow: rgb(0 0 0 / 0.15);
+
+  background-color: var(--toggle-track);
+  border: 2px solid var(--text-primary);
+  border-radius: 9999px;
+  transition: background-color 200ms;
+}
+
+@utility retro-toggle-thumb {
+  background-color: var(--toggle-thumb);
+  box-shadow: 0 6px 0 0 var(--toggle-shadow);
+  transition:
+    background-color 200ms,
+    transform 200ms;
 }
