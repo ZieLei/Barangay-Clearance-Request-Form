@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+@import 'pixelarticons/fonts/pixelart-icons-font.css';
 
 :root {
   color-scheme: light;
@@ -12,6 +13,10 @@
   --accent-secondary: #778DA9;
 
   --border: #D6CEC1;
+
+  --success: #527A5A;
+  --warning: #C49A3A;
+  --danger: #A6534D;
 }
 
 .dark {
@@ -24,10 +29,72 @@
   --accent-secondary: #8499B3;
 
   --border: #414B57;
+
+  --success: #8DBB91;
+  --warning: #E2BD68;
+  --danger: #D9877F;
+}
+
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src: url('./assets/fonts/line-seed/LINESeedSans_W_Th.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src: url('./assets/fonts/line-seed/LINESeedSans_W_Rg.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src: url('./assets/fonts/line-seed/LINESeedSans_W_Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src: url('./assets/fonts/line-seed/LINESeedSans_W_XBd.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src: url('./assets/fonts/line-seed/LINESeedSans_W_He.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('./assets/fonts/instrument-serif/InstrumentSerif-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('./assets/fonts/instrument-serif/InstrumentSerif-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
 
 
 @theme inline {
+  --font-line-seed: 'LINE Seed Sans', sans-serif;
+  --font-instrument-serif: 'Instrument Serif', serif;
   --color-background: var(--background);
   --color-text-primary: var(--text-primary);
 
@@ -35,7 +102,13 @@
   --color-accent-secondary: var(--accent-secondary);
 
   --color-border: var(--border);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
 }
+
+
 
 body {
   @apply bg-background text-text-primary;
