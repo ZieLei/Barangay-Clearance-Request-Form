@@ -1,59 +1,88 @@
-# BarangayClearance
+# Barangay Clearance Request Form
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.4.
+A retro-styled barangay clearance request form built with Angular Reactive Forms. It validates each field, previews the request as you type, and reports the form's status in a live banner.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Collect** a full name, birthdate, address, contact number and purpose of request.
+- **Require** every field, and **validate** the contact number against the `09XXXXXXXXX` format with a custom validator.
+- **Reveal** a required "Specify purpose" field only when the purpose is "Others" (driven by `valueChanges`).
+- **Preview** the request in a live card that updates as you type.
+- **Show** a status banner that reacts to `statusChanges` (valid, invalid or pending).
+- **Confirm** the request in a modal before submitting.
+- **Switch** between light and dark themes. The choice is saved and defaults to your system preference.
 
-```bash
-ng serve
-```
+## Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [Angular](https://angular.dev) 22 (standalone components, signals, Reactive Forms)
+- [Tailwind CSS](https://tailwindcss.com) 4
+- [Pixelarticons](https://pixelarticons.com) for icons
+- Gruvbox color palette
+- Space Mono, Space Grotesk and Fraunces fonts (bundled, SIL OFL)
 
-## Code scaffolding
+## Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
-```
+- [Node.js](https://nodejs.org) (a version supported by Angular 22)
+- npm
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Install
 
 ```bash
-ng test
+git clone https://github.com/ZieLei/Barangay-Clearance-Request-Form.git
+cd Barangay-Clearance-Request-Form
+npm install
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Run
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Open `http://localhost:4200/`. The app reloads whenever you change a source file.
 
-## Additional Resources
+### Build
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run build
+```
+
+The build output lands in `dist/barangay-clearance/`.
+
+### Test
+
+```bash
+npm test
+```
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── app.ts / app.html        # Form, preview card, status banner, theme toggle
+│   ├── components/
+│   │   ├── confirm-modal/       # Submit confirmation dialog
+│   │   ├── date-picker/         # Birthdate picker (ControlValueAccessor)
+│   │   └── select/              # Purpose dropdown (ControlValueAccessor)
+│   └── validators/
+│       └── ph-mobile.validator.ts   # 09XXXXXXXXX validator
+├── assets/fonts/                # Bundled fonts and their licenses
+└── styles.css                   # Gruvbox theme tokens and retro UI utilities
+```
+
+## How It Works
+
+| Requirement | Implementation |
+| --- | --- |
+| Required fields | `Validators.required` on every control |
+| Contact number format | `phMobileValidator()` accepts `09` followed by nine digits |
+| "Others" purpose | `purpose.valueChanges` enables and requires `otherPurpose`, and disables and clears it for any other choice |
+| Live preview | A signal built from `form.valueChanges` feeds the preview card |
+| Status banner | A signal built from `form.statusChanges` selects the banner message |
+
+## Contributing
+
+Fork the repository, create a branch, commit your changes and open a pull request.
