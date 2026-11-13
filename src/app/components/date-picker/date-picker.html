@@ -1,91 +1,142 @@
 <div class="relative inline-block font-line-seed">
   <!-- Input field -->
-  <div
-    class="flex flex-row items-center border-2 bg-border/50 font-line-seed border-text-primary w-70 h-9 px-1 shadow-[inset_0px_6px_0px_0px_var(--shadow)]"
-    [class.opacity-50]="disabled">
-    <input type="text" class="flex-1 min-w-0 h-full bg-transparent py-2 px-1 focus:outline-none"
-      placeholder="YYYY-MM-DD" [value]="inputText" [disabled]="disabled" [attr.aria-invalid]="inputInvalid"
-      [class.text-text-primary]="!inputInvalid" [class.text-warning]="inputInvalid"
-      (input)="onInput($any($event.target).value)" (blur)="commitInput()" (keydown.enter)="commitInput(); close()"
-      (keydown.escape)="close()" (keydown.arrowdown)="open()" />
+  <div class="retro-input flex flex-row items-center gap-1 w-70" [class.opacity-50]="disabled">
+    <input
+      type="text"
+      class="flex-1 min-w-0 bg-transparent outline-none placeholder:uppercase"
+      placeholder="YYYY-MM-DD"
+      [value]="inputText"
+      [disabled]="disabled"
+      [attr.aria-invalid]="inputInvalid"
+      [class.text-warning]="inputInvalid"
+      (input)="onInput($any($event.target).value)"
+      (blur)="commitInput()"
+      (keydown.enter)="commitInput(); close()"
+      (keydown.escape)="close()"
+      (keydown.arrowdown)="open()"
+    />
 
     @if (selectedDate && !disabled) {
-    <button type="button" class="px-1" (click)="clear()" aria-label="Clear date">✕</button>
+      <button
+        type="button"
+        class="flex items-center opacity-60 hover:opacity-100"
+        (click)="clear()"
+        aria-label="Clear date"
+      >
+        <i class="pixelart-icons-font-close text-sm leading-none" aria-hidden="true"></i>
+      </button>
     }
 
-    <button type="button" class="px-1 flex items-center" (click)="toggle()" [disabled]="disabled"
-      aria-label="Toggle calendar" [attr.aria-expanded]="isOpen">
-      <i class="pixelart-icons-font-calendar text-sm pt-1 leading-none text-text-primary" aria-hidden="true"></i>
+    <button
+      type="button"
+      class="flex items-center"
+      (click)="toggle()"
+      [disabled]="disabled"
+      aria-label="Toggle calendar"
+      [attr.aria-expanded]="isOpen"
+    >
+      <i class="pixelart-icons-font-calendar text-base leading-none" aria-hidden="true"></i>
     </button>
   </div>
 
   <!-- Calendar popup -->
   @if (isOpen) {
-  <div
-    class="absolute left-0 top-full mt-1 z-50 bg-background border-2 border-text-primary w-70 py-2 px-2 font-line-seed shadow-[inset_0px_6px_0px_0px_var(--shadow)]">
-
-    <!-- Calendar header -->
-    <div class="flex flex-row justify-between items-center">
-      <button type="button" (click)="previous()" [attr.aria-label]="'Previous ' + stepLabel">
-        &lt;
-      </button>
-
-      <button type="button" class="font-bold" (click)="zoomOut()" [disabled]="view === 'years'">
-        {{ headerLabel }}
-      </button>
-
-      <button type="button" (click)="next()" [attr.aria-label]="'Next ' + stepLabel">
-        &gt;
-      </button>
-    </div>
-
-    <!-- DAYS VIEW -->
-    @if (view === 'days') {
-    <div class="grid grid-cols-7 place-items-center">
-      @for (dayName of dayNames; track dayName) {
-      <span class="font-bold">{{ dayName }}</span>
-      }
-    </div>
-
-    <div>
-      @for (week of calendarWeeks; track $index) {
-      <div class="grid grid-cols-7 place-items-center">
-        @for (day of week; track day.iso) {
-        <button type="button" class="w-full" [class.opacity-40]="!day.inCurrentMonth"
-          [class.bg-text-primary]="day.iso === selectedDate" [class.text-background]="day.iso === selectedDate"
-          [class.underline]="day.iso === todayIso" [class.font-bold]="day.iso === todayIso"
-          [attr.aria-pressed]="day.iso === selectedDate" [attr.aria-label]="day.iso" (click)="selectDay(day)">
-          {{ day.day }}
+    <div class="retro-panel absolute left-0 top-full mt-2 z-50 w-70 p-2">
+      <!-- Header -->
+      <div class="flex flex-row justify-between items-center mb-1">
+        <button
+          type="button"
+          class="retro-item flex items-center p-1"
+          (click)="previous()"
+          [attr.aria-label]="'Previous ' + stepLabel"
+        >
+          <i class="pixelart-icons-font-chevron-left text-base leading-none" aria-hidden="true"></i>
         </button>
-        }
+
+        <button
+          type="button"
+          class="retro-item font-bold px-2 py-0.5"
+          (click)="zoomOut()"
+          [disabled]="view === 'years'"
+        >
+          {{ headerLabel }}
+        </button>
+
+        <button
+          type="button"
+          class="retro-item flex items-center p-1"
+          (click)="next()"
+          [attr.aria-label]="'Next ' + stepLabel"
+        >
+          <i
+            class="pixelart-icons-font-chevron-right text-base leading-none"
+            aria-hidden="true"
+          ></i>
+        </button>
       </div>
-      }
-    </div>
-    }
 
-    <!-- MONTHS VIEW -->
-    @if (view === 'months') {
-    <div class="grid grid-cols-3 place-items-center gap-y-2 py-2">
-      @for (monthName of monthNames; track $index) {
-      <button type="button" class="w-full py-1" [class.bg-text-primary]="isSelectedMonth($index)"
-        [class.text-background]="isSelectedMonth($index)" (click)="selectMonth($index)">
-        {{ monthName }}
-      </button>
-      }
-    </div>
-    }
+      <!-- DAYS VIEW -->
+      @if (view === 'days') {
+        <div class="grid grid-cols-7 place-items-center text-xs opacity-70 mb-1">
+          @for (dayName of dayNames; track dayName) {
+            <span class="font-bold">{{ dayName }}</span>
+          }
+        </div>
 
-    <!-- YEARS VIEW -->
-    @if (view === 'years') {
-    <div class="grid grid-cols-3 place-items-center gap-y-2 py-2">
-      @for (year of yearRange; track year) {
-      <button type="button" class="w-full py-1" [class.bg-text-primary]="isSelectedYear(year)"
-        [class.text-background]="isSelectedYear(year)" [class.underline]="year === currentYear" (click)="selectYear(year)">
-        {{ year }}
-      </button>
+        <div class="flex flex-col gap-0.5">
+          @for (week of calendarWeeks; track $index) {
+            <div class="grid grid-cols-7 gap-0.5">
+              @for (day of week; track day.iso) {
+                <button
+                  type="button"
+                  class="retro-item h-8 text-sm"
+                  [class.opacity-40]="!day.inCurrentMonth"
+                  [class.underline]="day.iso === todayIso"
+                  [class.font-bold]="day.iso === todayIso"
+                  [attr.aria-pressed]="day.iso === selectedDate"
+                  [attr.aria-label]="day.iso"
+                  (click)="selectDay(day)"
+                >
+                  {{ day.day }}
+                </button>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      <!-- MONTHS VIEW -->
+      @if (view === 'months') {
+        <div class="grid grid-cols-3 gap-1 py-1">
+          @for (monthName of monthNames; track $index) {
+            <button
+              type="button"
+              class="retro-item py-2"
+              [attr.aria-pressed]="isSelectedMonth($index)"
+              (click)="selectMonth($index)"
+            >
+              {{ monthName }}
+            </button>
+          }
+        </div>
+      }
+
+      <!-- YEARS VIEW -->
+      @if (view === 'years') {
+        <div class="grid grid-cols-3 gap-1 py-1">
+          @for (year of yearRange; track year) {
+            <button
+              type="button"
+              class="retro-item py-2"
+              [class.underline]="year === currentYear"
+              [attr.aria-pressed]="isSelectedYear(year)"
+              (click)="selectYear(year)"
+            >
+              {{ year }}
+            </button>
+          }
+        </div>
       }
     </div>
-    }
-  </div>
   }
 </div>

@@ -1,25 +1,43 @@
 <div class="relative inline-block font-line-seed">
   <!-- Trigger -->
-  <button type="button"
-    class="flex flex-row items-center justify-between border-2 bg-border/50 font-line-seed border-text-primary w-70 h-9 px-2 shadow-[inset_0px_6px_0px_0px_var(--shadow)] focus:outline-none text-left"
-    [class.opacity-50]="disabled" [disabled]="disabled" aria-haspopup="listbox" [attr.aria-expanded]="isOpen"
-    (click)="toggle()" (keydown)="onKeydown($event)">
-    <span class="truncate" [class.opacity-60]="!value">{{ value ?? placeholder() }}</span>
-    <i class="pixelart-icons-font-chevron-down text-sm pt-1 leading-none text-text-primary" aria-hidden="true"></i>
+  <button
+    type="button"
+    class="retro-input flex flex-row items-center justify-between gap-2 w-70 text-left"
+    [class.opacity-50]="disabled"
+    [disabled]="disabled"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="isOpen"
+    (click)="toggle()"
+    (keydown)="onKeydown($event)"
+  >
+    <span class="truncate" [class.opacity-45]="!value" [class.uppercase]="!value">
+      {{ value ?? placeholder() }}
+    </span>
+    <i
+      class="pixelart-icons-font-chevron-down text-base leading-none transition-transform"
+      [class.rotate-180]="isOpen"
+      aria-hidden="true"
+    ></i>
   </button>
 
   <!-- Options -->
   @if (isOpen) {
-  <ul role="listbox"
-    class="absolute left-0 top-full mt-1 z-50 bg-background border-2 border-text-primary w-70 py-1 font-line-seed shadow-[6px_6px_0px_0px_var(--shadow)]">
-    @for (option of options(); track option; let i = $index) {
-    <li role="option" [attr.aria-selected]="option === value"
-      class="px-2 py-1 cursor-pointer hover:bg-text-primary hover:text-background"
-      [class.bg-text-primary]="i === activeIndex" [class.text-background]="i === activeIndex"
-      [class.font-bold]="option === value" (click)="choose(option)" (mouseenter)="activeIndex = i">
-      {{ option }}
-    </li>
-    }
-  </ul>
+    <ul
+      role="listbox"
+      class="retro-panel absolute left-0 top-full mt-2 z-50 w-70 p-1 flex flex-col gap-0.5"
+    >
+      @for (option of options(); track option; let i = $index) {
+        <li
+          role="option"
+          class="retro-item px-2 py-1.5"
+          [attr.aria-selected]="option === value"
+          [attr.data-active]="i === activeIndex"
+          (click)="choose(option)"
+          (mouseenter)="activeIndex = i"
+        >
+          {{ option }}
+        </li>
+      }
+    </ul>
   }
 </div>

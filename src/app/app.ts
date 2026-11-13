@@ -51,10 +51,8 @@ export class App {
     otherPurpose: new FormControl({ value: '', disabled: true }, { nonNullable: true }),
   });
 
-  /** Live form values for the preview card. */
   readonly value = toSignal(this.form.valueChanges.pipe(startWith(null)), { initialValue: null });
 
-  /** Form status from statusChanges: VALID | INVALID | PENDING | DISABLED. */
   readonly status = toSignal(this.form.statusChanges.pipe(startWith(this.form.status)), {
     initialValue: this.form.status,
   });
@@ -71,35 +69,22 @@ export class App {
     };
   });
 
-  readonly banner = computed(() => {
-    switch (this.status()) {
-      case 'VALID':
-        return { tone: 'success', text: 'All set — the request is ready to submit.' };
-      case 'PENDING':
-        return { tone: 'warning', text: 'Checking…' };
-      default:
-        return { tone: 'danger', text: 'Please complete all required fields correctly.' };
-    }
-  });
-
   constructor() {
     this.isDark = this.initialTheme();
 
     const other = this.form.controls.otherPurpose;
 
-    this.form.controls.purpose.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe((purpose) => {
-        if (purpose === 'Others') {
-          other.setValidators([Validators.required]);
-          other.enable();
-        } else {
-          other.clearValidators();
-          other.reset('');
-          other.disable();
-        }
-        other.updateValueAndValidity();
-      });
+    this.form.controls.purpose.valueChanges.pipe(takeUntilDestroyed()).subscribe((purpose) => {
+      if (purpose === 'Others') {
+        other.setValidators([Validators.required]);
+        other.enable();
+      } else {
+        other.clearValidators();
+        other.reset('');
+        other.disable();
+      }
+      other.updateValueAndValidity();
+    });
   }
 
   private initialTheme(): boolean {
@@ -110,7 +95,6 @@ export class App {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
-  /** True when a control was touched and has the given error. */
   hasError(name: keyof typeof this.form.controls, error: string): boolean {
     const c = this.form.controls[name];
     return c.touched && c.hasError(error);

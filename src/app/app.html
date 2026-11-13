@@ -1,5 +1,5 @@
-<div class="min-h-200 m-8 p-5 border-2 border-text-primary shadow-[6px_6px_0px_0px_var(--shadow)]">
-  <div class="flex flex-row justify-between">
+<div class="retro-panel min-h-200 m-8 p-5">
+  <div class="flex flex-row justify-between items-center">
     <div class="flex bg-text-primary p-1 w-fit px-5">
       <h1 class="text-xl text-background font-line-seed font-bold">
         Barangay Clearance Request Form
@@ -8,29 +8,25 @@
 
     <button
       type="button"
+      class="retro-toggle"
       (click)="isDark = !isDark"
-      class="retro-toggle relative flex h-3 w-14 items-center"
-      [style.--toggle-track]="isDark ? 'var(--accent-primary)' : 'var(--background)'"
-      [style.--toggle-thumb]="isDark ? 'var(--background)' : 'var(--text-primary)'"
-      [style.--toggle-shadow]="isDark ? 'rgb(255 255 255 / 0.15)' : 'rgb(0 0 0 / 0.15)'"
+      [attr.aria-pressed]="isDark"
+      aria-label="Toggle dark mode"
     >
-      <span
-        class="retro-toggle-thumb h-6 w-6 -translate-y-1 rounded-full"
-        [class.translate-x-6]="isDark"
-        [class.translate-x-0]="!isDark"
-      ></span>
+      <span class="retro-toggle-thumb" [class.translate-x-7]="isDark"></span>
     </button>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-row justify-evenly">
-    <div class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_var(--shadow)]">
+    <div class="retro-panel flex-1 m-5 p-5 flex flex-col gap-4">
       <div class="flex flex-col gap-1">
         <label for="fullName" class="font-line-seed font-bold text-sm">FULL NAME</label>
         <input
           id="fullName"
           type="text"
           formControlName="fullName"
-          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--shadow)] focus:outline-none"
+          placeholder="Juan Dela Cruz"
+          class="retro-input w-70"
         />
         @if (hasError('fullName', 'required')) {
           <small class="text-danger font-line-seed">Full name is required.</small>
@@ -38,14 +34,11 @@
       </div>
 
       <div class="flex flex-col gap-1">
-        <div class="flex flex-col gap-1">
-          <label class="font-line-seed font-bold text-sm"> BIRTHDATE </label>
-
-          <app-date-picker formControlName="birthdate" />
-          @if (hasError('birthdate', 'required')) {
-            <small class="text-danger font-line-seed">Birthdate is required.</small>
-          }
-        </div>
+        <label class="font-line-seed font-bold text-sm">BIRTHDATE</label>
+        <app-date-picker formControlName="birthdate" />
+        @if (hasError('birthdate', 'required')) {
+          <small class="text-danger font-line-seed">Birthdate is required.</small>
+        }
       </div>
 
       <div class="flex flex-col gap-1">
@@ -54,7 +47,8 @@
           id="address"
           type="text"
           formControlName="address"
-          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--shadow)] focus:outline-none"
+          placeholder="Street, Barangay, City"
+          class="retro-input w-70"
         />
         @if (hasError('address', 'required')) {
           <small class="text-danger font-line-seed">Address is required.</small>
@@ -67,7 +61,8 @@
           id="contactNumber"
           type="tel"
           formControlName="contactNumber"
-          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--shadow)] focus:outline-none"
+          placeholder="09XXXXXXXXX"
+          class="retro-input w-70"
         />
         @if (hasError('contactNumber', 'required')) {
           <small class="text-danger font-line-seed">Contact number is required.</small>
@@ -92,7 +87,8 @@
             id="otherPurpose"
             type="text"
             formControlName="otherPurpose"
-            class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--shadow)] focus:outline-none"
+            placeholder="Specify purpose"
+            class="retro-input w-70"
           />
           @if (hasError('otherPurpose', 'required')) {
             <small class="text-danger font-line-seed">Please specify your purpose.</small>
@@ -100,30 +96,40 @@
         </div>
       }
 
-      <button
-        type="submit"
-        [disabled]="form.invalid"
-        class="mt-3 border-2 border-text-primary px-4 py-1 font-line-seed font-bold disabled:opacity-50"
-      >
-        SUBMIT
-      </button>
+      <div class="mt-2">
+        <button type="submit" [disabled]="form.invalid" class="retro-button retro-button-success">
+          <i class="pixelart-icons-font-check" aria-hidden="true"></i>
+          SUBMIT
+        </button>
+      </div>
     </div>
 
-    <div
-      class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_var(--shadow)] font-line-seed"
-    >
-      <small>Live Preview</small>
-      <dl class="mt-2 text-sm">
-        <dt class="font-bold">NAME</dt>
-        <dd>{{ preview().fullName || '—' }}</dd>
-        <dt class="font-bold mt-1">BIRTHDATE</dt>
-        <dd>{{ preview().birthdate || '—' }}</dd>
-        <dt class="font-bold mt-1">ADDRESS</dt>
-        <dd>{{ preview().address || '—' }}</dd>
-        <dt class="font-bold mt-1">CONTACT</dt>
-        <dd>{{ preview().contactNumber || '—' }}</dd>
-        <dt class="font-bold mt-1">PURPOSE</dt>
-        <dd>{{ preview().purpose || '—' }}</dd>
+    <div class="retro-panel flex-1 m-5 p-5 font-line-seed self-start">
+      <div class="bg-text-primary w-fit px-3 py-0.5">
+        <small class="text-background font-bold tracking-wider">LIVE PREVIEW</small>
+      </div>
+
+      <dl class="mt-4 text-sm flex flex-col gap-3">
+        <div>
+          <dt class="font-bold">NAME</dt>
+          <dd>{{ preview().fullName || '—' }}</dd>
+        </div>
+        <div>
+          <dt class="font-bold">BIRTHDATE</dt>
+          <dd>{{ preview().birthdate || '—' }}</dd>
+        </div>
+        <div>
+          <dt class="font-bold">ADDRESS</dt>
+          <dd>{{ preview().address || '—' }}</dd>
+        </div>
+        <div>
+          <dt class="font-bold">CONTACT</dt>
+          <dd>{{ preview().contactNumber || '—' }}</dd>
+        </div>
+        <div>
+          <dt class="font-bold">PURPOSE</dt>
+          <dd>{{ preview().purpose || '—' }}</dd>
+        </div>
       </dl>
     </div>
   </form>
