@@ -16,12 +16,21 @@
     </button>
   </div>
 
-  <form [formGroup]="form" class="flex flex-row justify-evenly">
+  <div class="mx-5 mt-5 p-2 border-2 border-text-primary font-line-seed font-bold text-sm"
+    [class.text-success]="banner().tone === 'success'" [class.text-warning]="banner().tone === 'warning'"
+    [class.text-danger]="banner().tone === 'danger'">
+    {{ status() }} — {{ banner().text }}
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-row justify-evenly">
     <div class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_#252422]">
       <div class="flex flex-col gap-1">
         <label for="fullName" class="font-line-seed font-bold text-sm">FULL NAME</label>
         <input id="fullName" type="text" formControlName="fullName"
           class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none">
+        @if (hasError('fullName', 'required')) {
+        <small class="text-danger font-line-seed">Full name is required.</small>
+        }
       </div>
 
       <div class="flex flex-col gap-1">
@@ -31,24 +40,39 @@
           </label>
 
           <app-date-picker formControlName="birthdate" />
-        </div>
+          @if (hasError('birthdate', 'required')) {
+        <small class="text-danger font-line-seed">Birthdate is required.</small>
+        }
+      </div>
       </div>
 
       <div class="flex flex-col gap-1">
         <label for="address" class="font-line-seed font-bold text-sm">ADDRESS</label>
         <input id="address" type="text" formControlName="address"
           class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none">
+        @if (hasError('address', 'required')) {
+        <small class="text-danger font-line-seed">Address is required.</small>
+        }
       </div>
 
       <div class="flex flex-col gap-1">
         <label for="contactNumber" class="font-line-seed font-bold text-sm">CONTACT NUMBER</label>
         <input id="contactNumber" type="tel" formControlName="contactNumber"
           class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none">
+        @if (hasError('contactNumber', 'required')) {
+        <small class="text-danger font-line-seed">Contact number is required.</small>
+        }
+        @if (hasError('contactNumber', 'phMobile')) {
+        <small class="text-danger font-line-seed">Use the format 09XXXXXXXXX.</small>
+        }
       </div>
 
       <div class="flex flex-col gap-1">
         <label class="font-line-seed font-bold text-sm">PURPOSE</label>
         <app-select formControlName="purpose" [options]="purposes" placeholder="Select purpose" />
+        @if (hasError('purpose', 'required')) {
+        <small class="text-danger font-line-seed">Please select a purpose.</small>
+        }
       </div>
 
       @if (form.value.purpose === 'Others') {
@@ -56,12 +80,32 @@
         <label for="otherPurpose" class="font-line-seed font-bold text-sm">SPECIFY PURPOSE</label>
         <input id="otherPurpose" type="text" formControlName="otherPurpose"
           class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none">
+        @if (hasError('otherPurpose', 'required')) {
+        <small class="text-danger font-line-seed">Please specify your purpose.</small>
+        }
       </div>
       }
+
+      <button type="submit" [disabled]="form.invalid"
+        class="mt-3 border-2 border-text-primary px-4 py-1 font-line-seed font-bold disabled:opacity-50">
+        SUBMIT
+      </button>
     </div>
 
-    <div class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_#252422]">
+    <div class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_#252422] font-line-seed">
       <small>Live Preview</small>
+      <dl class="mt-2 text-sm">
+        <dt class="font-bold">NAME</dt>
+        <dd>{{ preview().fullName || '—' }}</dd>
+        <dt class="font-bold mt-1">BIRTHDATE</dt>
+        <dd>{{ preview().birthdate || '—' }}</dd>
+        <dt class="font-bold mt-1">ADDRESS</dt>
+        <dd>{{ preview().address || '—' }}</dd>
+        <dt class="font-bold mt-1">CONTACT</dt>
+        <dd>{{ preview().contactNumber || '—' }}</dd>
+        <dt class="font-bold mt-1">PURPOSE</dt>
+        <dd>{{ preview().purpose || '—' }}</dd>
+      </dl>
     </div>
   </form>
 </div>
