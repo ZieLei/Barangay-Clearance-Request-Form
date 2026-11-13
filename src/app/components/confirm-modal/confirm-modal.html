@@ -1,0 +1,44 @@
+@if (open()) {
+  <div
+    class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40"
+    (click)="cancelled.emit()"
+  >
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirm-modal-title"
+      class="retro-panel w-full max-w-md p-5 font-space-mono"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="bg-text-primary w-fit px-3 py-0.5">
+        <small id="confirm-modal-title" class="text-background font-bold tracking-wider uppercase">
+          {{ title() }}
+        </small>
+      </div>
+
+      <p class="mt-4 text-sm">{{ message() }}</p>
+
+      <ng-content />
+
+      <div class="mt-5 flex flex-row flex-wrap justify-end gap-x-3 gap-y-4">
+        <button
+          type="button"
+          class="retro-button retro-button-danger retro-button-flip whitespace-nowrap"
+          (click)="cancelled.emit()"
+        >
+          {{ cancelLabel() }}
+          <i class="pixelart-icons-font-close" aria-hidden="true"></i>
+        </button>
+        <button
+          type="button"
+          class="retro-button retro-button-success whitespace-nowrap"
+          (click)="confirmed.emit()"
+          autofocus
+        >
+          <i class="pixelart-icons-font-check" aria-hidden="true"></i>
+          {{ confirmLabel() }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
