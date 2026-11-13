@@ -6,33 +6,33 @@
 :root {
   color-scheme: light;
 
-  --background: #F2EFE9;
-  --text-primary: #252422;
+  --background: #fbf1c7;
+  --text-primary: #654735;
 
-  --accent-primary: #415A77;
-  --accent-secondary: #778DA9;
+  --accent-primary: #45707a;
+  --accent-secondary: #c35e0a;
 
-  --border: #D6CEC1;
+  --border: #e5d5ad;
 
-  --success: #527A5A;
-  --warning: #C49A3A;
-  --danger: #A6534D;
+  --success: #6c782e;
+  --warning: #b47109;
+  --danger: #c14a4a;
 }
 
 .dark {
   color-scheme: dark;
 
-  --background: #222831;
-  --text-primary: #EAE6DF;
+  --background: #282828;
+  --text-primary: #d4be98;
 
-  --accent-primary: #A3B8D0;
-  --accent-secondary: #8499B3;
+  --accent-primary: #7daea3;
+  --accent-secondary: #e78a4e;
 
-  --border: #414B57;
+  --border: #45403d;
 
-  --success: #8DBB91;
-  --warning: #E2BD68;
-  --danger: #D9877F;
+  --success: #a9b665;
+  --warning: #d8a657;
+  --danger: #ea6962;
 }
 
 @font-face {

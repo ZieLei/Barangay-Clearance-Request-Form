@@ -1,7 +1,7 @@
 <div class="relative inline-block font-line-seed">
   <!-- Input field -->
   <div
-    class="flex flex-row items-center border-2 bg-border/50 font-line-seed border-text-primary w-70 h-9 px-1 shadow-[inset_0px_6px_0px_0px_#252422]"
+    class="flex flex-row items-center border-2 bg-border/50 font-line-seed border-text-primary w-70 h-9 px-1 shadow-[inset_0px_6px_0px_0px_var(--text-primary)]"
     [class.opacity-50]="disabled">
     <input type="text" class="flex-1 min-w-0 h-full bg-transparent py-2 px-1 focus:outline-none"
       placeholder="YYYY-MM-DD" [value]="inputText" [disabled]="disabled" [attr.aria-invalid]="inputInvalid"
@@ -22,7 +22,7 @@
   <!-- Calendar popup -->
   @if (isOpen) {
   <div
-    class="absolute left-0 top-full mt-1 z-50 bg-white border-2 border-text-primary w-70 py-2 px-2 font-line-seed shadow-[inset_0px_6px_0px_0px_#252422]">
+    class="absolute left-0 top-full mt-1 z-50 bg-background border-2 border-text-primary w-70 py-2 px-2 font-line-seed shadow-[inset_0px_6px_0px_0px_var(--text-primary)]">
 
     <!-- Calendar header -->
     <div class="flex flex-row justify-between items-center">
@@ -52,7 +52,7 @@
       <div class="grid grid-cols-7 place-items-center">
         @for (day of week; track day.iso) {
         <button type="button" class="w-full" [class.opacity-40]="!day.inCurrentMonth"
-          [class.bg-text-primary]="day.iso === selectedDate" [class.text-white]="day.iso === selectedDate"
+          [class.bg-text-primary]="day.iso === selectedDate" [class.text-background]="day.iso === selectedDate"
           [class.underline]="day.iso === todayIso" [class.font-bold]="day.iso === todayIso"
           [attr.aria-pressed]="day.iso === selectedDate" [attr.aria-label]="day.iso" (click)="selectDay(day)">
           {{ day.day }}
@@ -68,7 +68,7 @@
     <div class="grid grid-cols-3 place-items-center gap-y-2 py-2">
       @for (monthName of monthNames; track $index) {
       <button type="button" class="w-full py-1" [class.bg-text-primary]="isSelectedMonth($index)"
-        [class.text-white]="isSelectedMonth($index)" (click)="selectMonth($index)">
+        [class.text-background]="isSelectedMonth($index)" (click)="selectMonth($index)">
         {{ monthName }}
       </button>
       }
@@ -80,7 +80,7 @@
     <div class="grid grid-cols-3 place-items-center gap-y-2 py-2">
       @for (year of yearRange; track year) {
       <button type="button" class="w-full py-1" [class.bg-text-primary]="isSelectedYear(year)"
-        [class.text-white]="isSelectedYear(year)" [class.underline]="year === currentYear" (click)="selectYear(year)">
+        [class.text-background]="isSelectedYear(year)" [class.underline]="year === currentYear" (click)="selectYear(year)">
         {{ year }}
       </button>
       }

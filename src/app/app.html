@@ -1,4 +1,4 @@
-<div class="min-h-200 m-8 p-5 border-2 border-text-primary shadow-[6px_6px_0px_0px_#252422]">
+<div class="min-h-200 m-8 p-5 border-2 border-text-primary shadow-[6px_6px_0px_0px_var(--text-primary)]">
   <div class="flex flex-row justify-between">
     <div class="flex bg-text-primary p-1 w-fit px-5">
       <h1 class="text-xl text-background font-line-seed font-bold">
@@ -9,7 +9,7 @@
     <button
       type="button"
       (click)="isDark = !isDark"
-      class="relative flex h-8 w-16 p-1 border-2 border-text-primary items-center shadow-[6px_6px_0px_0px_#252422] active:translate-x-1.5 active:translate-y-1.5 active:shadow-none transition-all duration-200"
+      class="relative flex h-8 w-16 p-1 border-2 border-text-primary items-center shadow-[6px_6px_0px_0px_var(--text-primary)] active:translate-x-1.5 active:translate-y-1.5 active:shadow-none transition-all duration-200"
       [class.bg-background]="!isDark"
     >
       <span
@@ -22,14 +22,14 @@
   </div>
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-row justify-evenly">
-    <div class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_#252422]">
+    <div class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_var(--text-primary)]">
       <div class="flex flex-col gap-1">
         <label for="fullName" class="font-line-seed font-bold text-sm">FULL NAME</label>
         <input
           id="fullName"
           type="text"
           formControlName="fullName"
-          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none"
+          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--text-primary)] focus:outline-none"
         />
         @if (hasError('fullName', 'required')) {
           <small class="text-danger font-line-seed">Full name is required.</small>
@@ -53,7 +53,7 @@
           id="address"
           type="text"
           formControlName="address"
-          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none"
+          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--text-primary)] focus:outline-none"
         />
         @if (hasError('address', 'required')) {
           <small class="text-danger font-line-seed">Address is required.</small>
@@ -66,7 +66,7 @@
           id="contactNumber"
           type="tel"
           formControlName="contactNumber"
-          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none"
+          class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--text-primary)] focus:outline-none"
         />
         @if (hasError('contactNumber', 'required')) {
           <small class="text-danger font-line-seed">Contact number is required.</small>
@@ -91,7 +91,7 @@
             id="otherPurpose"
             type="text"
             formControlName="otherPurpose"
-            class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_#252422] focus:outline-none"
+            class="border-2 bg-border/50 font-line-seed text-text-primary border-text-primary w-70 py-2 px-1 h-9 shadow-[inset_0px_6px_0px_0px_var(--text-primary)] focus:outline-none"
           />
           @if (hasError('otherPurpose', 'required')) {
             <small class="text-danger font-line-seed">Please specify your purpose.</small>
@@ -109,7 +109,7 @@
     </div>
 
     <div
-      class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_#252422] font-line-seed"
+      class="flex-1 m-5 p-3 border-2 border-text-primary shadow-[6px_6px_0px_0px_var(--text-primary)] font-line-seed"
     >
       <small>Live Preview</small>
       <dl class="mt-2 text-sm">
