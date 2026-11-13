@@ -5,11 +5,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { startWith } from 'rxjs';
 import { DatePicker } from './components/date-picker/date-picker';
 import { Select } from './components/select/select';
+import { ConfirmModal } from './components/confirm-modal/confirm-modal';
 import { phMobileValidator } from './validators/ph-mobile.validator';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, DatePicker, Select, ReactiveFormsModule],
+  imports: [RouterOutlet, DatePicker, Select, ConfirmModal, ReactiveFormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -57,6 +58,17 @@ export class App {
     initialValue: this.form.status,
   });
 
+  readonly banner = computed(() => {
+    switch (this.status()) {
+      case 'VALID':
+        return { tone: 'success', icon: 'check', text: 'Review your request, then submit it.' };
+      case 'PENDING':
+        return { tone: 'warning', icon: 'clock', text: 'Hold on while we check your details.' };
+      default:
+        return { tone: 'danger', icon: 'warning-diamond', text: 'Fill in every field correctly to continue.' };
+    }
+  });
+
   readonly preview = computed(() => {
     this.value(); // re-evaluate on every change
     const v = this.form.getRawValue();
@@ -100,9 +112,17 @@ export class App {
     return c.touched && c.hasError(error);
   }
 
+  /** Whether the submit confirmation modal is showing. */
+  readonly confirmOpen = signal(false);
+
   submit(): void {
     this.form.markAllAsTouched();
     if (this.form.invalid) return;
+    this.confirmOpen.set(true);
+  }
+
+  confirmSubmit(): void {
+    this.confirmOpen.set(false);
     console.log('Submitted', this.preview());
   }
 }

@@ -1,26 +1,55 @@
 <div class="retro-panel min-h-200 m-8 p-5">
   <div class="flex flex-row justify-between items-center">
     <div class="flex bg-text-primary p-1 w-fit px-5">
-      <h1 class="text-xl text-background font-line-seed font-bold">
+      <h1 class="text-xl text-background font-fraunces font-bold">
         Barangay Clearance Request Form
       </h1>
     </div>
 
-    <button
-      type="button"
-      class="retro-toggle"
-      (click)="isDark = !isDark"
-      [attr.aria-pressed]="isDark"
-      aria-label="Toggle dark mode"
-    >
-      <span class="retro-toggle-thumb" [class.translate-x-7]="isDark"></span>
-    </button>
+    <div class="flex items-center gap-3">
+      <span class="grid font-space-mono text-sm font-bold tracking-wider leading-none" aria-hidden="true">
+        <span
+          class="col-start-1 row-start-1 text-right transition-all duration-300"
+          [class.opacity-0]="isDark"
+          [class.-translate-y-1]="isDark"
+          >Light</span
+        >
+        <span
+          class="col-start-1 row-start-1 text-right transition-all duration-300"
+          [class.opacity-0]="!isDark"
+          [class.translate-y-1]="!isDark"
+          >Dark</span
+        >
+      </span>
+
+      <button
+        type="button"
+        class="retro-toggle"
+        (click)="isDark = !isDark"
+        [attr.aria-pressed]="isDark"
+        aria-label="Toggle dark mode"
+      >
+        <span class="retro-toggle-thumb" [class.translate-x-7]="isDark"></span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    role="status"
+    aria-live="polite"
+    class="retro-panel mx-5 mt-5 p-3 flex flex-row items-center gap-3 font-space-mono text-sm font-bold transition-colors duration-200"
+    [class.text-success]="banner().tone === 'success'"
+    [class.text-warning]="banner().tone === 'warning'"
+    [class.text-danger]="banner().tone === 'danger'"
+  >
+    <i [class]="'pixelart-icons-font-' + banner().icon" aria-hidden="true"></i>
+    <span>{{ banner().text }}</span>
   </div>
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-row justify-evenly">
     <div class="retro-panel flex-1 m-5 p-5 flex flex-col gap-4">
       <div class="flex flex-col gap-1">
-        <label for="fullName" class="font-line-seed font-bold text-sm">FULL NAME</label>
+        <label for="fullName" class="font-space-mono font-bold text-sm">FULL NAME</label>
         <input
           id="fullName"
           type="text"
@@ -29,20 +58,20 @@
           class="retro-input w-70"
         />
         @if (hasError('fullName', 'required')) {
-          <small class="text-danger font-line-seed">Full name is required.</small>
+          <small class="text-danger font-space-mono">Full name is required.</small>
         }
       </div>
 
       <div class="flex flex-col gap-1">
-        <label class="font-line-seed font-bold text-sm">BIRTHDATE</label>
+        <label class="font-space-mono font-bold text-sm">BIRTHDATE</label>
         <app-date-picker formControlName="birthdate" />
         @if (hasError('birthdate', 'required')) {
-          <small class="text-danger font-line-seed">Birthdate is required.</small>
+          <small class="text-danger font-space-mono">Birthdate is required.</small>
         }
       </div>
 
       <div class="flex flex-col gap-1">
-        <label for="address" class="font-line-seed font-bold text-sm">ADDRESS</label>
+        <label for="address" class="font-space-mono font-bold text-sm">ADDRESS</label>
         <input
           id="address"
           type="text"
@@ -51,12 +80,12 @@
           class="retro-input w-70"
         />
         @if (hasError('address', 'required')) {
-          <small class="text-danger font-line-seed">Address is required.</small>
+          <small class="text-danger font-space-mono">Address is required.</small>
         }
       </div>
 
       <div class="flex flex-col gap-1">
-        <label for="contactNumber" class="font-line-seed font-bold text-sm">CONTACT NUMBER</label>
+        <label for="contactNumber" class="font-space-mono font-bold text-sm">CONTACT NUMBER</label>
         <input
           id="contactNumber"
           type="tel"
@@ -65,24 +94,24 @@
           class="retro-input w-70"
         />
         @if (hasError('contactNumber', 'required')) {
-          <small class="text-danger font-line-seed">Contact number is required.</small>
+          <small class="text-danger font-space-mono">Contact number is required.</small>
         }
         @if (hasError('contactNumber', 'phMobile')) {
-          <small class="text-danger font-line-seed">Use the format 09XXXXXXXXX.</small>
+          <small class="text-danger font-space-mono">Use the format 09XXXXXXXXX.</small>
         }
       </div>
 
       <div class="flex flex-col gap-1">
-        <label class="font-line-seed font-bold text-sm">PURPOSE</label>
+        <label class="font-space-mono font-bold text-sm">PURPOSE</label>
         <app-select formControlName="purpose" [options]="purposes" placeholder="Select purpose" />
         @if (hasError('purpose', 'required')) {
-          <small class="text-danger font-line-seed">Please select a purpose.</small>
+          <small class="text-danger font-space-mono">Please select a purpose.</small>
         }
       </div>
 
       @if (form.value.purpose === 'Others') {
         <div class="flex flex-col gap-1">
-          <label for="otherPurpose" class="font-line-seed font-bold text-sm">SPECIFY PURPOSE</label>
+          <label for="otherPurpose" class="font-space-mono font-bold text-sm">SPECIFY PURPOSE</label>
           <input
             id="otherPurpose"
             type="text"
@@ -91,7 +120,7 @@
             class="retro-input w-70"
           />
           @if (hasError('otherPurpose', 'required')) {
-            <small class="text-danger font-line-seed">Please specify your purpose.</small>
+            <small class="text-danger font-space-mono">Please specify your purpose.</small>
           }
         </div>
       }
@@ -104,7 +133,7 @@
       </div>
     </div>
 
-    <div class="retro-panel flex-1 m-5 p-5 font-line-seed self-start">
+    <div class="retro-panel flex-1 m-5 p-5 font-space-mono self-start">
       <div class="bg-text-primary w-fit px-3 py-0.5">
         <small class="text-background font-bold tracking-wider">LIVE PREVIEW</small>
       </div>
@@ -133,4 +162,14 @@
       </dl>
     </div>
   </form>
+
+  <app-confirm-modal
+    [open]="confirmOpen()"
+    title="Submit request?"
+    message="Please double-check your details. Submit this barangay clearance request?"
+    confirmLabel="Submit"
+    cancelLabel="Cancel"
+    (confirmed)="confirmSubmit()"
+    (cancelled)="confirmOpen.set(false)"
+  />
 </div>
