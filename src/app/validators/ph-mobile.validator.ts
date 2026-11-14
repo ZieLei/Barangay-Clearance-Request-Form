@@ -1,6 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-/** Philippine mobile number: 09 followed by 9 digits (e.g. 09171234567). */
 export const PH_MOBILE_PATTERN = /^09\d{9}$/;
 
 export function phMobileValidator(): ValidatorFn {
